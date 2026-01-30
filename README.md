@@ -1,5 +1,5 @@
 # COP4533 Programming Assignment 1
-Thurstan Ngo - 86963382
+Thurstan Ngo - 86963382  
 Syed Rahman - 
 
 ## Assumptions
