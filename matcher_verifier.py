@@ -28,9 +28,9 @@ def main():
         
         # Read input
         file = input('Type name of input file: ')
-        with open(file) as f:
+        with open(file) as f_in:
             # Read first line of input file
-            first_line = f.readline()
+            first_line = f_in.readline()
             try:
                 if not first_line:
                     print('File is empty')
@@ -42,11 +42,11 @@ def main():
             
             hospital_preferences = []       # list of (tuples of strings that have values of 1 to n)
             for _ in range(n):
-                input_line = f.readline()
+                input_line = f_in.readline()
                 hospital_preferences.append(list(input_line.split()))
             student_preferences = []        # list of (tuples of strings that have values of 1 to n)
             for _ in range(n):
-                input_line = f.readline()
+                input_line = f_in.readline()
                 student_preferences.append(list(input_line.split()))     
 
 
@@ -60,8 +60,11 @@ def main():
         while unmatched_hospitals:
             unmatched_hospitals = gale_shapley(unmatched_hospitals, hospital_preferences, student_preferences, matches)
 
-        for key, value in sorted(matches.items(), key=lambda item: item[1]):
-            print(f'{value} {key}')
+        with open('output.txt', 'w', encoding="utf-8") as f_out:
+            for key, value in sorted(matches.items(), key=lambda item: item[1]):
+                f_out.write(f'{value} {key}\n')
+        
+        print('Output of matching engine was written to output.txt')
 
         
     elif mode == '2':
