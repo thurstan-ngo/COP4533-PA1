@@ -1,7 +1,31 @@
+def gale_shapley(free_hospitals, hospital_preferences, student_preferences, matches):
+    
+    unmatched_hospitals = []
+    
+    for h in free_hospitals:
+        # h is 1 to n
+        for a in hospital_preferences[h - 1]:
+            # a is 1 to n
+            if a not in matches.keys():
+                matches[a] = h
+                break
+
+            student_list = student_preferences[int(a) - 1]
+            if student_list.index(str(h)) < student_list.index(str(matches[a])):
+                # IF a prefers h to her/his current assignment h' THEN assign a and h and h' has a slot free
+                # Look at student's preference list and see if student prefers h over h' (index of h < index of h')
+                unmatched_hospitals.append(matches[a])
+                matches[a] = h
+                break
+
+    return unmatched_hospitals
+
+
 def main():
     mode = input('Type 1 for matching engine or 2 for verifier: ')
     
     if mode == '1':
+        
         # Read input
         file = input('Type name of input file: ')
         with open(file) as f:
@@ -15,21 +39,31 @@ def main():
             except:
                 print('First line of input file is invalid')
                 return
-            # print(f.read())
             
-            hospital_preferences = []
+            hospital_preferences = []       # list of (tuples of strings that have values of 1 to n)
             for _ in range(n):
                 input_line = f.readline()
-                hospital_preferences.append(tuple(input_line.split()))
-            student_preferences = []
+                hospital_preferences.append(list(input_line.split()))
+            student_preferences = []        # list of (tuples of strings that have values of 1 to n)
             for _ in range(n):
                 input_line = f.readline()
-                student_preferences.append(tuple(input_line.split()))
-        
-        print(f'{n} hospitals')
-        print(hospital_preferences)
-        print(student_preferences)
+                student_preferences.append(list(input_line.split()))     
 
+
+        # Matching algorithm
+        
+        matches = {}
+        # Key:      (student)  -> string
+        # Value:    (hospital) -> int
+        
+        unmatched_hospitals = list(range(1, n+1))
+        while unmatched_hospitals:
+            unmatched_hospitals = gale_shapley(unmatched_hospitals, hospital_preferences, student_preferences, matches)
+
+        for key, value in sorted(matches.items(), key=lambda item: item[1]):
+            print(f'{value} {key}')
+
+        
     elif mode == '2':
         print('Verifier')
     else:
