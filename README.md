@@ -4,8 +4,8 @@ Syed Rahman -
 
 ## Running the Matcher and Verifier
 Type `python3 matcher_verifier.py` into the terminal to run the program
-* This program has 2 modes: Matcher and Verifier
-  * When prompted, type 1 for the Matcher or 2 for the Verifier and follow the additional prompts if needed
+* This program has 2 modes: matcher and verifier
+  * When prompted, type 1 for the matcher or 2 for the verifier; follow the additional prompts if needed
 
 ## Assumptions
 * There are 2n lines after the first line of the input file
