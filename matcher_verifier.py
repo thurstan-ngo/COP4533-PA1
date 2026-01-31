@@ -50,6 +50,31 @@ def is_valid_matching(matches, n):
         return False
     return True
 
+def is_stable(matches, hospital_preferences, student_preferences):
+    # build reversed matching map so that loop isnt needed for searching
+    student_hospital_match = {}
+    for h in matches:
+        student_hospital_match[matches[h]] = h
+
+    for h in matches:
+        current_student = matches[h]
+        h_pref = hospital_preferences[h - 1]
+
+        # hospital checks students it prefers more than its current one
+        for s in h_pref:
+            if s == current_student:
+                break
+
+            curr_hospital_student = student_hospital_match[s]
+            s_pref = student_preferences[int(s) - 1]
+
+            if s_pref.index(str(h)) < s_pref.index(str(curr_hospital_student)):
+                print(f"unstable pair ({h}, {s})")
+                return False
+
+    return True
+
+
 def main():
     mode = input('Type 1 for matching engine or 2 for verifier: ')
     
