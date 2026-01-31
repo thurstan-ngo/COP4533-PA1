@@ -29,6 +29,27 @@ def read_matching(match_file):
             matches[int(h)] = s
     return matches
 
+#check fro valid match
+def is_valid_matching(matches, n):
+    #since mathces is a dictionary it takes care of duplicate hospitals
+    if len(matches) != n:
+        print("incorrect number of matches")
+        return False
+
+    students = list(matches.values())
+
+    #make sure that all hospitals are matched
+    for h in range(1, n + 1):
+        if h not in matches:
+            print(f"hospital {h} unmatched")
+            return False
+
+    # set removes duplicates so we can see if duplicate students exist by comparing to n
+    if len(set(students)) != n:
+        print("duplicate students found matching")
+        return False
+    return True
+
 def main():
     mode = input('Type 1 for matching engine or 2 for verifier: ')
     
