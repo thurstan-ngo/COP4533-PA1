@@ -122,7 +122,38 @@ def main():
 
         
     elif mode == '2':
-        print('Verifier')
+        # Read  input file of preferences
+        file = input('Type name of input file: ')
+        with open(file) as f_in:
+            first_line = f_in.readline()
+            try:
+                if not first_line:
+                    print('File is empty')
+                    return
+                n = int(first_line)
+            except:
+                print('First line of input file is invalid')
+                return
+
+            hospital_preferences = []
+            for _ in range(n):
+                hospital_preferences.append(f_in.readline().split())
+
+            student_preferences = []
+            for _ in range(n):
+                student_preferences.append(f_in.readline().split())
+
+        # Read output matching file
+        match_file = input('Type name of matching output file: ')
+        matches = read_matching(match_file)
+
+        # check valid matching
+        if not is_valid_matching(matches, n):
+            return
+
+        # check stable matching
+        if is_stable(matches, hospital_preferences, student_preferences):
+            print("Valid & Stable")
     else:
         print('Invalid input')
             
