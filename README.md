@@ -15,6 +15,6 @@ Run `diff ex_out.txt output.txt` to compare the example output file and the outp
 
 ## Task C
 ![Line graph for Task C](task-c.png)
-* To evaluate the sacalability of our implementation we measured the running time for both our matching and verifier algorithms for increasing values of n.
+* To evaluate the sacalability of our implementation we measured the running time for both our matching and verifier algorithms for increasing values of n = 1, 2, 4, 8, 16, 32, 64, 128, 256, 512. We ran each algo for 1000 iterations for each n values then measured the total running time and calculated average running time.
 * When looking at the graphs as n increases, the running time of the matcher and verifier also increase. This growth seems rapid and the shape appears parabolic.
 * This quadratic behavior is expected as the Gale Shapely algorithm in the worst case can make n^2 proposals in the matching algorithm. The vierifier also checks unstable pairs using the preference list comparisons as well which also would scale on a order of n^2. Thus the trend from our graph is our algorithms are in order O(n^2)
