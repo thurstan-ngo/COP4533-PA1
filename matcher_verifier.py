@@ -20,6 +20,14 @@ def gale_shapley(free_hospitals, hospital_preferences, student_preferences, matc
 
     return unmatched_hospitals
 
+# read the matching
+def read_matching(match_file):
+    matches = {}
+    with open(match_file) as f:
+        for line in f:
+            h, s = line.split()
+            matches[int(h)] = s
+    return matches
 
 def main():
     mode = input('Type 1 for matching engine or 2 for verifier: ')
