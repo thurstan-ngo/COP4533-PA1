@@ -14,3 +14,4 @@ Run `diff ex_out.txt output.txt` to compare the example output file and the outp
 * For the input file, the first n lines are the hospitals' preference lists and the next n lines are the students' preference lists
 
 ## Task C
+![Line graph for Task C](task-c.png)
